@@ -1,0 +1,26 @@
+import { Button } from "@/components/ui/button"
+
+import { useAuthStore } from "@/stores/useAuthStore"
+
+import { useNavigate } from "react-router"
+
+const Logout = () => {
+
+    const {signOut} = useAuthStore();
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            await signOut();
+            navigate("/signin")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (
+        <Button onClick={handleLogout}>logout</Button>
+    )
+}
+
+export default Logout
