@@ -92,7 +92,7 @@ export function SigninForm({
 
               <div className="text-center text-sm">
                 Chưa có tài khoản? {" "} 
-                <a href="/signup" className="uderline underline-offset-4">Đăng ký</a>
+                <a href="/signup" className="underline underline-offset-4">Đăng ký</a>
               </div>
 
             </div>

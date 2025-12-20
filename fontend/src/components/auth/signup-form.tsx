@@ -50,91 +50,86 @@ export function SignupForm({
   }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("flex flex-col gap-2", className)} {...props}>
       <Card className="overflow-hidden p-0 border-border">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col gap-6">
+          <form className="p-3 md:p-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-3">
               {/* header - logo */}
-              <div className="flex flex-col items-center text-center gap-2">
+              <div className="flex flex-col items-center text-center">
                 <a href="/" className="mx-auto block w-fit text-center">
-                  <img src="/logo.svg" alt="logo" />
+                  <img src="/logo.svg" alt="logo" className="h-8"/>
                 </a>
 
-                <h1 className="text-2xl font-bold">Tạo tài khoản Moji</h1>
-                <p className="text-muted-foreground text-balance">
+                <h1 className="text-lg font-bold">Tạo tài khoản Moji</h1>
+                <p className="text-muted-foreground text-xs">
                   chào mừng bạn hãy đăng kí để bắt đầu
                 </p>
               </div>
 
               {/* họ và tên */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <Label htmlFor="lastname" className="block text-sm">
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label htmlFor="lastname" className="block text-xs mb-1">
                     Họ
                   </Label>
-                  <Input type="text" id="lastname" {...register("lastname")}/>
-                  {/* todo: error message */}
+                  <Input type="text" id="lastname" className="h-8" {...register("lastname")}/>
                   {errors.lastname && (
-                    <p className="text-destructive text-sm">{errors.lastname.message}</p>
+                    <p className="text-destructive text-xs">{errors.lastname.message}</p>
                   )}
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="firstname" className="block text-sm">
+                <div>
+                  <Label htmlFor="firstname" className="block text-xs mb-1">
                     Tên
                   </Label>
-                  <Input type="text" id="firstname" {...register("firstname")}/>
-                  {/* todo: error message */}
+                  <Input type="text" id="firstname" className="h-8" {...register("firstname")}/>
                   {errors.firstname && (
-                    <p className="text-destructive text-sm">{errors.firstname.message}</p>
+                    <p className="text-destructive text-xs">{errors.firstname.message}</p>
                   )}
                 </div>
               </div>
 
               {/* username */}
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="username" className="block text-sm">
+              <div>
+                <Label htmlFor="username" className="block text-xs mb-1">
                   Tên đăng nhập
                 </Label>
-                <Input type="text" id="username" placeholder="moji" {...register("username")}/>
-                {/* todo: error message */}
+                <Input type="text" id="username" placeholder="moji" className="h-8" {...register("username")}/>
                 {errors.username && (
-                  <p className="text-destructive text-sm">{errors.username.message}</p>
+                  <p className="text-destructive text-xs">{errors.username.message}</p>
                 )}
               </div>
 
               {/* email */}
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="email" className="block text-sm">
+              <div>
+                <Label htmlFor="email" className="block text-xs mb-1">
                   Email
                 </Label>
-                <Input type="email" id="email" placeholder="m@gmail.com" {...register("email")}/>
-                {/* todo: error message */}
+                <Input type="email" id="email" placeholder="m@gmail.com" className="h-8" {...register("email")}/>
                 {errors.email && (
-                  <p className="text-destructive text-sm">{errors.email.message}</p>
+                  <p className="text-destructive text-xs">{errors.email.message}</p>
                 )}
               </div>
 
               {/* password */}
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="password" className="block text-sm">
+              <div>
+                <Label htmlFor="password" className="block text-xs mb-1">
                   Mật Khẩu
                 </Label>
-                <Input type="password" id="password" {...register("password")}/>
-                {/* todo: error message */}
+                <Input type="password" id="password" className="h-8" {...register("password")}/>
                 {errors.password && (
-                    <p className="text-destructive text-sm">{errors.password.message}</p>
+                    <p className="text-destructive text-xs">{errors.password.message}</p>
                 )}
               </div>
 
               {/* nút đăng kí */}
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
+              <Button type="submit" className="w-full h-8" disabled={isSubmitting}>
                 Tạo tài khoản
               </Button>
 
               <div className="text-center text-sm">
                 Đã có tài khoản? {" "} 
-                <a href="/signin" className="uderline underline-offset-4">Đăng nhập</a>
+                <a href="/signin" className="underline underline-offset-4">Đăng nhập</a>
               </div>
 
             </div>
@@ -143,7 +138,7 @@ export function SignupForm({
             <img
               src="/placeholderSignUp.png"
               alt="Image"
-              className="absolute top-1/2 -translate-y-1/2 object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </CardContent>
