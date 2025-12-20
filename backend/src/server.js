@@ -10,6 +10,9 @@ import {protectedRoute} from "./middlewares/authMiddleware.js"
 //router
 import authRoute from "./routes/authRoute.js"
 import userRoute from "./routes/userRoute.js"
+import friendRoute from "./routes/friendRoute.js"
+import messageRoute from "./routes/messageRoute.js"
+import conversationRoute from "./routes/conversationRoute.js"
 
 // thư viện để đọc được cookie
 import cookieParser from "cookie-parser"
@@ -36,6 +39,9 @@ app.use("/api/auth", authRoute)
 //private routes
 app.use(protectedRoute) // mọi dùng ở dưới middleware này điều chạy middleware trước rồi mới vô logic chính của chúng
 app.use("/api/users", userRoute)
+app.use("/api/friends", friendRoute)
+app.use("/api/messages", messageRoute)
+app.use("/api/conversations", conversationRoute)
 
 
 // connectDB chạy xong mới chạy app.listen
