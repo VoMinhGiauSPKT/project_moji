@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken"
 // refresh token
 import crypt from "crypto"
 
-const ACCESS_TOKEN_TTL = "30s"; // thường dưới 15m nhưng mà trong môi trường Dev thì để cao để dễ test API
+const ACCESS_TOKEN_TTL = "30m"; // thường dưới 15m nhưng mà trong môi trường Dev thì để cao để dễ test API
 const REFRESH_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 ngày theo mili giây
 
 // đăng kí
