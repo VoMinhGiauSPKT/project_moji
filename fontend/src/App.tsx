@@ -7,7 +7,15 @@ import ProtectedRoute from "./components/auth/ProtectedRoute"
 // thư viện giúp hiển thị thông báo dạng popup nên đặt ở cấp cao nhất
 import {Toaster} from "sonner"
 
+import { useThemeStore } from "./stores/useThemeStore"
+import { useEffect } from "react"
+
 function App() {
+  const {isDark, setTheme} = useThemeStore() 
+
+  useEffect(() => {
+    setTheme(isDark)
+  },[isDark])
 
   return (
     <>
