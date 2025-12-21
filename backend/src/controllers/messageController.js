@@ -17,7 +17,7 @@ export const sendDirectMessage = async (req, res) => {
 
         // tìm cuộc hội thoại bằng id rồi lưu vào biến
         if(conversationId){
-            conversation = await conversation.findById(conversationId)
+            conversation = await Conversation.findById(conversationId)
         }
 
         if(!conversation){

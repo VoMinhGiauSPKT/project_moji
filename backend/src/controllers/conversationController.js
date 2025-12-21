@@ -109,7 +109,7 @@ export const getConversation = async (req, res) => {
             }
         })  
         
-        return res.status(200).json({conversation: formatted})
+        return res.status(200).json({conversations: formatted})
     } catch (error) {
         console.error("lỗi khi lấy conversation", error)
         return res.status(500).json({message: "lỗi hệ thống"})

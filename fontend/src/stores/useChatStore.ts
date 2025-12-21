@@ -26,7 +26,6 @@ export const useChatStore = create<ChatState>()(
                 try {
                     set({loading: true})
                     const {conversations} = await chatService.fetchConversations()
-
                     set({conversations: conversations, loading: false})
                 } catch (error) {
                     console.error("lỗi xảy ra khi fetchConversations", error)

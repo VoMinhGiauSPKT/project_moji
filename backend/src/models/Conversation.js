@@ -58,7 +58,7 @@ const conversationSchema = new mongoose.Schema({
         required: true,
     },
     group: {
-        type: [groupSchema],
+        type: groupSchema,
     },
     lastMessageAt: { // lưu tg tin nhắn cuối
         type: Date,
@@ -70,7 +70,7 @@ const conversationSchema = new mongoose.Schema({
         }
     ],
     lastMessage: { // lưu tin nhắn cuối
-        type: [lastMessageSchema],
+        type: lastMessageSchema,
         default: null,
     },
     unreadCounts: { // số tin nhắn chưa đọc trong ui
