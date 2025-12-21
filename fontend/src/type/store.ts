@@ -44,9 +44,13 @@ export interface ChatState {
         nextCursor?: string | null // con trỏ để biết lần fetch tiếp theo bắt đầu từ đâu
     }>
     activeConversationId: string | null
-    loading: boolean
+    convoLoading: boolean
+    messageLoading: boolean
     reset: () => void
     setActiveConversation: (id: string | null) => void // để component khác cập nhật activeConversation 
 
     fetchConversations: () => Promise<void>
+
+
+    fetchMessages: (conversationId?: string) => Promise<void>
 }
