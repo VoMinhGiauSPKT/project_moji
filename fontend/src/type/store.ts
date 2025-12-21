@@ -1,3 +1,4 @@
+import type { Conversation, Message } from "./chat";
 import type { User } from "./user"
 
 export interface AuthState {
@@ -31,4 +32,21 @@ export interface ThemeState {
     isDark: boolean
     toggleTheme: () => void
     setTheme: (dark: boolean) => void
+}
+
+export interface ChatState {
+    conversations: Conversation[]
+    // record tức là map từng cuộc hội thoại với tin nhắn thuộc về hội thoại đó
+    // thay thì nhét tất cả các tin nhắn về 1 mảng thì chia ra key với value
+    messages: Record<string, {
+        items: Message[]
+        hasMore: boolean // cờ để biết còn tin nhắn cũ hay không để lấy tiếp
+        nextCursor?: string | null // con trỏ để biết lần fetch tiếp theo bắt đầu từ đâu
+    }>
+    activeConversationId: string | null
+    loading: boolean
+    reset: () => void
+    setActiveConversation: (id: string | null) => void // để component khác cập nhật activeConversation 
+
+    fetchConversations: () => Promise<void>
 }
