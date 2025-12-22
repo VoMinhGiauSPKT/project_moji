@@ -20,10 +20,13 @@ import cookieParser from "cookie-parser"
 // cors
 import cors from "cors"
 
+// socket
+import {app, server} from "./socket/index.js"
+
 // để load các biến môi trường
 dotenv.config()
 
-const app = express()
+// const app = express()
 const PORT = process.env.PORT || 5000;
 
 // middlewares
@@ -47,7 +50,7 @@ app.use("/api/conversations", conversationRoute)
 // connectDB chạy xong mới chạy app.listen
 connectDB().then(() => {
     //cho server chạy
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(`server đang chạy trên cổng ${PORT}`)
     })
 })
