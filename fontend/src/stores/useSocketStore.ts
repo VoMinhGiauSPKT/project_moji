@@ -29,7 +29,7 @@ export const useSocketStore = create<SocketState>((set, get) => ({
         })
 
         // online users
-        socket.on("online-user", (userIds) => {
+        socket.on("online-users", (userIds) => {
             set({onlineUsers: userIds})
         })
 
