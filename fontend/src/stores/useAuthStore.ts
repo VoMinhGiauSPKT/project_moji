@@ -25,8 +25,9 @@ export const useAuthStore = create<AuthState>()(
             
             // xóa localStorage để người sau không lấy được dữ liệu nếu 2 người dùng 1 máy
             // để tránh lỗi bất ngờ như bị văn khỏi trình duyệt mà chưa logout
-            localStorage.clear()
             useChatStore.getState().reset()
+            localStorage.clear()
+            sessionStorage.clear()
         },
 
         signUp: async (username, password, email, firstName, lastName) => {
@@ -46,6 +47,7 @@ export const useAuthStore = create<AuthState>()(
 
         signIn: async (username, password) => {
             try {
+                get().clearState()
                 set({loading: true});
                 // xóa localStorage để người sau không lấy được dữ liệu nếu 2 người dùng 1 máy
                 // để tránh lỗi bất ngờ như bị văn khỏi trình duyệt mà chưa logout

@@ -1,5 +1,6 @@
 import Conversation from "../models/Conversation.js"
 import Message from "../models/Message.js"
+import { io } from "../socket/index.js"
 
 export const createConversation = async (req, res) => {
     try {
@@ -164,5 +165,66 @@ export const getUserConversationForSocketIO = async (userId) => {
     } catch (error) {
         console.error("lỗi khi fect conversation: ", error)
         return []
+    }
+}
+
+export const markAsSeen = async (req, res) => {
+    try {
+        const {conversationId} = req.params
+        const userId = req.user._id.toString()
+
+        const conversation = await Conversation.findById(conversationId).lean()
+
+        if(!conversation){
+            return res.status(404).json({message: "conversation không tồn tại"})
+        }
+
+        const last = conversation.lastMessage
+
+        if(!last) {
+            return res.status(200).json({message: "không có tin nhắn để mark as seen"})
+        }
+
+        // nếu người gửi cuối cùng là người gửi req này thì không cần làm gì hết
+        if(last.senderId.toString() === userId) {
+            return res.status(200).json({message: "sender không cần mark as seen"})
+        }
+
+        // đánh dấu đã đọc 
+        // 1. thêm user vào danh sách seenby
+        // 2. reset số tin chưa đọc về không cho user hiện tại
+
+        const updated = await Conversation.findByIdAndUpdate(
+            conversationId,
+            {
+                $addToSet: {seenBy: userId}, // thêm user vào mảng seenby
+                $set: {[`unreadCounts.${userId}`]: 0}    // dùng để gán giá trị cho 1 fill
+            },{
+                new: true
+            }
+        )
+
+        // emit sự kiện này với socket io để thành viên trong cuộc hội thoại này điều biết là tin đã đọc
+        io.to(conversationId).emit("read-message", {
+            conversation: updated,
+            lastMessage: {
+                _id: updated?.lastMessage._id,
+                content: updated?.lastMessage.content,
+                createdAt: updated?.lastMessage.createdAt,
+                sender: {
+                    _id: updated?.lastMessage.senderId,
+                }
+            }
+        })
+
+        return res.status(200).json({
+            message:"Marked as seen",
+            seenBy: updated?.seenBy || [],
+            myUnreadCount: updated?.unreadCounts[userId] || 0,
+        })
+
+    } catch (error) {
+        console.error("lỗi khi marked as seen", error)
+        return res.status(500).json({message: "lỗi hệ thống"})
     }
 }
