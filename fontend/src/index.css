@@ -120,3 +120,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.error-message {
+  @apply text-sm text-destructive
+}
+
+.success-message {
+  @apply text-sm text-emerald-500
+}

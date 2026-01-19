@@ -75,7 +75,7 @@ export function SignupForm({
                   </Label>
                   <Input type="text" id="lastname" className="h-8" {...register("lastname")}/>
                   {errors.lastname && (
-                    <p className="text-destructive text-xs">{errors.lastname.message}</p>
+                    <p className="error-message">{errors.lastname.message}</p>
                   )}
                 </div>
                 <div>
@@ -84,7 +84,7 @@ export function SignupForm({
                   </Label>
                   <Input type="text" id="firstname" className="h-8" {...register("firstname")}/>
                   {errors.firstname && (
-                    <p className="text-destructive text-xs">{errors.firstname.message}</p>
+                    <p className="error-message">{errors.firstname.message}</p>
                   )}
                 </div>
               </div>
