@@ -1,4 +1,5 @@
 import { useFriendStore } from "@/stores/useFriendStore"
+import FriendRequestItem from "./FriendRequestItem"
 
 
 const SentRequests = () => {
@@ -15,7 +16,16 @@ const SentRequests = () => {
 
     return (
         <div className="space-y-3 mt-4">
-            <>{sentList.map((req) => console.log(req))}</>
+            <>{sentList.map((req) => (
+                <FriendRequestItem
+                    key={req._id}
+                    requestInfo={req}
+                    type="sent"
+                    actions={<p className="text-muted-foreground text-sm">
+                        Đang chờ trả lời ...
+                    </p>}
+                />
+            ))}</>
         </div>
     )
 }

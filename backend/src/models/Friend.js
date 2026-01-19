@@ -29,7 +29,7 @@ friendSchema.pre("save", async function () {
 
 })
 
-friendSchema.index({userA:1, userb: 1}, {unique: true})
+friendSchema.index({userA: 1, userB: 1}, {unique: true})
 
 const Friend = mongoose.model("Friend", friendSchema)
 export default Friend

@@ -59,7 +59,7 @@ const AddFriendModal = () => {
         if(!searchUser) return
 
         try {
-            const message = await addFriend(searchUser._id, data.message.trim())
+            const message = await addFriend(searchUser._id, data.message)
             toast.success(message)
 
             handleCanncel()

@@ -84,7 +84,7 @@ export const acceptFriendRequest = async (req, res) => {
         }
 
         // tạo bạn bè với nhau
-        const friend = await Friend.create({
+        await Friend.create({
             userA: request.from,
             userB: request.to
         })
