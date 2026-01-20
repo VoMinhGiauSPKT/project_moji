@@ -1,6 +1,7 @@
 import { useFriendStore } from "@/stores/useFriendStore"
 import FriendRequestItem from "./FriendRequestItem"
 import { Button } from "../ui/button"
+import { toast } from "sonner"
 
 
 const ReceivedRequests = () => {
@@ -16,6 +17,7 @@ const ReceivedRequests = () => {
     const handleAccept = async (requestId: string) => {
         try {
             await acceptRequest(requestId)
+            toast.success("Đã đồng ý kết bạn thành công")
         } catch (error) {   
             console.error(error)
         }
@@ -24,6 +26,7 @@ const ReceivedRequests = () => {
     const handleDecline = async (requestId: string) => {
         try {
             await declineRequest(requestId)
+            toast.info("Đã từ chối kết bạn")
         } catch (error) {
             console.error(error)
         }

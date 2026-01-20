@@ -159,8 +159,8 @@ export const getAllFriends = async (req, res) => {
                 }
             ]
         })
-        .populate("userA", "_id displayName avatarUrl") // lấy thông tin chi tiết
-        .populate("userB", "_id displayName avatarUrl")
+        .populate("userA", "_id displayName avatarUrl username") // lấy thông tin chi tiết
+        .populate("userB", "_id displayName avatarUrl username")
         .lean()
 
         if(!friendShips){
