@@ -1,7 +1,11 @@
 import type { Dispatch, SetStateAction } from "react"
-import { Dialog, DialogContent } from "../ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
 import ProfileCard from "./ProfileCard"
 import { useAuthStore } from "@/stores/useAuthStore"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
+import PersonalInfoForm from "./PersonalInfoForm"
+import PreferencesForm from "./PreferencesForm"
+import PrivacySettings from "./PrivacySettings"
 
 
 interface ProfileDialogProps{
@@ -19,17 +23,55 @@ const ProfileDialog = ({open, setOpen}: ProfileDialogProps ) => {
             onOpenChange={setOpen}
         >
             <DialogContent className=" overflow-y-auto p-0 bg-transparent border-0 shadow-2xl">
-                <div className="bg-blue-100">
+                <div className="bg-gray-100 dark:bg-gray-800">
                     <div className="max-w-4xl mx-auto p-4">
                         {/* heading */}
-                        <div className="mb-6">
-                            <h1 className="text-2xl font-bold text-foreground">
+                        <DialogHeader className="mb-6">
+                            <DialogTitle className="text-2xl font-bold text-foreground">
                                 Profile & Settings
-                            </h1>
-                        </div>
+                            </DialogTitle>
+                        </DialogHeader>
                         <ProfileCard
                             user={user}
                         />
+
+                        <Tabs
+                            defaultValue="personal"
+                            className="my-4"
+                        >
+                            <TabsList className="grid w-full grid-cols-3 glass-light">
+                                <TabsTrigger
+                                    value="personal"
+                                    className="data-[state=active]:glass-strong"
+                                >
+                                    Tài Khoản
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="preferences"
+                                    className="data-[state=active]:glass-strong"
+                                >
+                                    Cấu Hình
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="privacy"
+                                    className="data-[state=active]:glass-strong"
+                                >
+                                     Mật
+                                </TabsTrigger>
+                            </TabsList>
+
+                            <TabsContent value="personal">
+                                <PersonalInfoForm userInfo={user} />
+                            </TabsContent>
+
+                            <TabsContent value="preferences">
+                                <PreferencesForm />
+                            </TabsContent>
+
+                            <TabsContent value="privacy">
+                                <PrivacySettings />
+                            </TabsContent>
+                        </Tabs>
                     </div>
                 </div>
 
